@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>#شهروند_مطالبه_گر</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body{
   direction:rtl;
@@ -25,13 +26,14 @@ body{
 
 .header img{
   max-width:100%;
-  height:auto;        /* ارتفاع تصویر واقعی */
+  height:auto;
   display:block;
-  object-fit: contain; /* تصویر در اندازه خودش بدون زوم */
+  object-fit: contain;
 }
 
 /* فرم */
 .box{
+  width:90%;
   max-width:600px;
   margin:20px auto 50px auto;
   background:#ffffff;
@@ -53,6 +55,7 @@ input,textarea{
   border-radius:6px;
   border:1px solid #ccc;
   transition:0.3s;
+  font-size:16px;
 }
 
 input:focus, textarea:focus{
@@ -66,7 +69,7 @@ textarea{
 
 button{
   width:100%;
-  padding:12px;
+  padding:14px;
   background: linear-gradient(135deg,#1976d2,#4a90e2);
   color:#fff;
   border:none;
@@ -94,13 +97,31 @@ button:hover{
   color:#555;
   text-align:center;
 }
+
+/* Media Queries برای موبایل */
+@media (max-width:480px){
+  .box{
+    padding:20px;
+  }
+  input,textarea{
+    font-size:14px;
+    padding:8px;
+  }
+  button{
+    font-size:15px;
+    padding:12px;
+  }
+  .footer{
+    font-size:12px;
+  }
+}
+
 </style>
 </head>
 <body>
 
 <div class="header">
-  <!-- لوگو بنر با اندازه واقعی تصویر -->
-  <img src="file:///C:/Users/BHR-fazai%20majazi/Pictures/%D8%B4%D9%87%D8%B1%D9%88%D9%86%D8%AF.jpg" alt="لوگو بنر">
+  <img src="https://mrtarh.com/project/CIJE-EBZI/%D8%AA%D8%B1%DB%8C%D8%A8%D9%88%D9%86-%D8%A2%D8%B2%D8%A7%D8%AF" alt="لوگو بنر">
 </div>
 
 <div class="box">
