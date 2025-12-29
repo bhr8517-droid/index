@@ -7,15 +7,44 @@
 body{
   direction:rtl;
   font-family:tahoma;
-  background:#f2f2f2;
+  background: linear-gradient(135deg, #d9f0ff, #ffffff);
+  margin:0;
+  padding:0;
 }
+
+/* هدر لوگو با اندازه واقعی تصویر */
+.header{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#1976d2;
+  padding:0;
+  box-shadow:0 4px 8px rgba(0,0,0,0.1);
+}
+
+.header img{
+  max-width:100%;
+  height:auto;        /* ارتفاع تصویر واقعی */
+  display:block;
+  object-fit: contain; /* تصویر در اندازه خودش بدون زوم */
+}
+
+/* فرم */
 .box{
   max-width:600px;
-  margin:40px auto;
-  background:#fff;
+  margin:20px auto 50px auto;
+  background:#ffffff;
   padding:25px;
   border-radius:12px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.1);
+  transition:0.3s;
 }
+
+.box:hover{
+  transform: translateY(-2px);
+}
+
 input,textarea{
   width:100%;
   padding:10px;
@@ -23,24 +52,42 @@ input,textarea{
   margin-bottom:16px;
   border-radius:6px;
   border:1px solid #ccc;
+  transition:0.3s;
 }
+
+input:focus, textarea:focus{
+  border-color:#1976d2;
+  box-shadow:0 0 8px rgba(25,118,210,0.3);
+}
+
 textarea{
   height:160px;
 }
+
 button{
   width:100%;
   padding:12px;
-  background:#1976d2;
+  background: linear-gradient(135deg,#1976d2,#4a90e2);
   color:#fff;
   border:none;
   border-radius:8px;
   cursor:pointer;
   font-size:16px;
+  transition:0.3s;
 }
+
+button:hover{
+  background: linear-gradient(135deg,#4a90e2,#1976d2);
+  transform: scale(1.03);
+  box-shadow:0 6px 15px rgba(0,0,0,0.2);
+}
+
 #status{
   margin-top:15px;
   font-size:14px;
+  color:#1976d2;
 }
+
 .footer{
   margin-top:25px;
   font-size:13px;
@@ -50,6 +97,11 @@ button{
 </style>
 </head>
 <body>
+
+<div class="header">
+  <!-- لوگو بنر با اندازه واقعی تصویر -->
+  <img src="file:///C:/Users/BHR-fazai%20majazi/Pictures/%D8%B4%D9%87%D8%B1%D9%88%D9%86%D8%AF.jpg" alt="لوگو بنر">
+</div>
 
 <div class="box">
   <h3>#شهروند_مطالبه_گر</h3>
