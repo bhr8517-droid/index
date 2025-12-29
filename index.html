@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<title>#شهروند_مطالبه_گر</title>
+<style>
+body{
+  direction:rtl;
+  font-family:tahoma;
+  background:#f2f2f2;
+}
+.box{
+  max-width:600px;
+  margin:40px auto;
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+}
+input,textarea{
+  width:100%;
+  padding:10px;
+  margin-top:8px;
+  margin-bottom:16px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+textarea{
+  height:160px;
+}
+button{
+  width:100%;
+  padding:12px;
+  background:#1976d2;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:16px;
+}
+#status{
+  margin-top:15px;
+  font-size:14px;
+}
+.footer{
+  margin-top:25px;
+  font-size:13px;
+  color:#555;
+  text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+  <h3>#شهروند_مطالبه_گر</h3>
+
+  <input id="name" placeholder="نام و نام خانوادگی">
+  <input id="title" placeholder="عنوان / سمت فرستنده">
+  <textarea id="message" placeholder="متن پیام خطاب به مسئولین"></textarea>
+
+  <div id="captchaText"></div>
+  <input id="captchaAnswer" placeholder="پاسخ کپچا">
+
+  <button onclick="send()">ارسال پیام</button>
+  <div id="status"></div>
+
+  <div class="footer">
+    تمامی حقوق برگزاری این پویش متعلق به کانال خبری نسیم آنلاین می‌باشد
+  </div>
+</div>
+
+<script>
+const WORKER_URL = "https://nsim1404.bhr8517.workers.dev/";
+
+const a = Math.floor(Math.random()*10)+1;
+const b = Math.floor(Math.random()*10)+1;
+document.getElementById("captchaText").innerText =
+"کپچا: " + a + " + " + b + " = ؟";
+
+function genCode(){
+  return "PX-" + Math.random().toString(16).slice(2,8).toUpperCase();
+}
+
+async function send(){
+  const name = document.getElementById("name").value.trim();
+  const title = document.getElementById("title").value.trim();
+  const message = document.getElementById("message").value.trim();
+  const answer = document.getElementById("captchaAnswer").value.trim();
+  const status = document.getElementById("status");
+
+  if(!name || !title || !message || !answer){
+    status.innerText = "همه فیلدها الزامی است";
+    return;
+  }
+
+  if(Number(answer) !== a + b){
+    status.innerText = "پاسخ کپچا نادرست است";
+    return;
+  }
+
+  const code = genCode();
+
+  try{
+    const res = await fetch(WORKER_URL,{
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body:JSON.stringify({ name,title,message,code })
+    });
+
+    if(res.ok){
+      status.innerHTML =
+      "✅ پیام ارسال شد<br>کد پیگیری: <b>"+code+"</b>";
+      document.getElementById("message").value="";
+    }else{
+      status.innerText="خطا در ارسال پیام";
+    }
+  }catch(e){
+    status.innerText="عدم اتصال به سرور";
+  }
+}
+</script>
+
+</body>
+</html>
