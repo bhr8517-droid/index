@@ -154,6 +154,26 @@ function genCode(){
   return "PX-" + Math.random().toString(16).slice(2,8).toUpperCase();
 }
 
+// تابع گرفتن تاریخ و ساعت شمسی
+function getDateTime(){
+  const now = new Date();
+
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+
+  const date = now.toLocaleDateString('fa-IR', options);
+  const time = now.toLocaleTimeString('fa-IR');
+
+  return {
+    date,
+    time
+  };
+}
+
 async function send(){
   const name = document.getElementById("name").value.trim();
   const title = document.getElementById("title").value.trim();
@@ -172,12 +192,20 @@ async function send(){
   }
 
   const code = genCode();
+  const dateTime = getDateTime();
 
   try{
     const res = await fetch(WORKER_URL,{
       method:"POST",
       headers:{ "Content-Type":"application/json" },
-      body:JSON.stringify({ name,title,message,code })
+      body:JSON.stringify({
+        name,
+        title,
+        message,
+        code,
+        date: dateTime.date,
+        time: dateTime.time
+      })
     });
 
     if(res.ok){
@@ -192,6 +220,7 @@ async function send(){
   }
 }
 </script>
+
 
 </body>
 </html>
